@@ -1,0 +1,109 @@
+/* Estilos para la tabla de clientes */
+.cliente-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.cliente-table th, .cliente-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+  color: #333;
+}
+
+.cliente-table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.cliente-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.cliente-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Estilos para el formulario de agregar cliente */
+.add-cliente-form {
+  margin-top: 20px;
+}
+
+.add-cliente-form input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-cliente-form button {
+  padding: 12px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-cliente-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el formulario de consultar cliente por ID */
+.consult-cliente-form {
+  margin-top: 20px;
+}
+
+.consult-cliente-form input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.consult-cliente-form button {
+  padding: 12px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.consult-cliente-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el cliente consultado */
+.consulted-cliente {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.consulted-cliente h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Estilos de la página */
+.App-header {
+  background-color: #7087b6;
+  min-height: 10vh; /* Modifica el valor aquí para ajustar la altura */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+}
+
+
+h1 {
+  font-size: 2rem;
+}

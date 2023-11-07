@@ -1,0 +1,62 @@
+/* Estilos para el contenedor principal */
+.catalogo-montos {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para la lista de montos */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .monto-item {
+    background-color: #ffffff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .monto-info {
+    flex: 1;
+  }
+  
+  .monto-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  /* Estilos para el formulario de agregar montos */
+  .monto-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input {
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

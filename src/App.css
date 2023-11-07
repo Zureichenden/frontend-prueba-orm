@@ -1,0 +1,79 @@
+App.css
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+}
+
+/* Agrega estilos para el menú de navegación */
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.nav-item {
+  margin-right: 20px;
+  text-align: center;
+}
+
+/* Estilo para el botón activo */
+.active {
+  background-color: #0074d9;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para los botones de navegación */
+.nav-item button {
+  background: none;
+  border: none;
+  color: rgb(7, 6, 6);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Estilo para el botón al hacer hover */
+.nav-item button:hover {
+  background-color: #0056b3;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  width: 300px;
+  text-align: left;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.user-id {
+  font-weight: bold;
+}
+
+.user-name {
+  margin-top: 5px;
+}
+
+.user-label {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2rem;
+}
