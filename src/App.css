@@ -19,6 +19,7 @@ App.css
   list-style: none;
   padding: 0;
   display: flex;
+  justify-content: center; /* Centra los elementos del menú horizontalmente */
 }
 
 .nav-item {

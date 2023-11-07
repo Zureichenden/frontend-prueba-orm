@@ -37,7 +37,7 @@ function Amortizaciones() {
   const [prestamoId, setPrestamoId] = useState<number | null>(null);
   const [prestamos, setPrestamos] = useState<PrestamoType[]>([]);
 
- 
+
 
   useEffect(() => {
     // Realiza una solicitud para obtener los datos de amortizaciones
@@ -53,14 +53,14 @@ function Amortizaciones() {
       .then((res) => res.json())
       .then((data) => {
         const { prestamo, amortizaciones } = data;
-  
+
         const cliente = prestamo.cliente;
         const monto = prestamo.monto;
-  
+
         alert(`Cliente: ${cliente.nombre}, Monto: $${monto.monto}, Fecha de Inicio: ${prestamo.fecha_inicio}, Interés: ${prestamo.interes}%`);
       });
   };
-  
+
 
   const handleBuscarAmortizacionesByPrestamo = () => {
     if (prestamoId) {
@@ -93,7 +93,7 @@ function Amortizaciones() {
             <th scope="col">Interés</th>
             <th scope="col">Abono</th>
           </tr>
-        </thead>  
+        </thead>
         <tbody>
           {amortizaciones.length > 0 ? (
             amortizaciones.map((row) => (
