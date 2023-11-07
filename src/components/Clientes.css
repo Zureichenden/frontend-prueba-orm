@@ -1,6 +1,6 @@
 /* Estilos para la tabla de clientes */
 .cliente-table {
-  width: 100%;
+  width: 80%; /* Cambia el ancho de la tabla al 80% del contenedor */
   border-collapse: collapse;
   margin: 20px 0;
   border: 1px solid #ccc;
@@ -9,22 +9,9 @@
 
 .cliente-table th, .cliente-table td {
   border: 1px solid #ccc;
-  padding: 12px;
+  padding: 10px; /* Reduzco el espaciado dentro de las celdas */
   text-align: left;
   color: #333;
-}
-
-.cliente-table th {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.cliente-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-.cliente-table tbody tr:nth-child(odd) {
-  background-color: #fff;
 }
 
 /* Estilos para el formulario de agregar cliente */
@@ -101,9 +88,4 @@
   justify-content: center;
   font-size: 1rem;
   color: white;
-}
-
-
-h1 {
-  font-size: 2rem;
 }

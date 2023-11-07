@@ -30,12 +30,14 @@ interface AmortizacionType {
   interes_pago: number;
   abono: number;
   capital_pendiente: number;
+  prestamo: PrestamoType;
 }
 
 function Amortizaciones() {
   const [amortizaciones, setAmortizaciones] = useState<AmortizacionType[]>([]);
   const [prestamoId, setPrestamoId] = useState<number | null>(null);
   const [prestamos, setPrestamos] = useState<PrestamoType[]>([]);
+  const [clienteNombre, setClienteNombre] = useState<string>('');
 
 
 
@@ -68,6 +70,26 @@ function Amortizaciones() {
     }
   };
 
+// Agregar función para buscar préstamos por nombre de cliente
+const handleBuscarPorNombre = () => {
+  if (clienteNombre) {
+    // Si el nombre no es nulo o vacío, realizar una búsqueda específica
+    fetch(`http://localhost:3000/amortizaciones/cliente/${clienteNombre}`)
+      .then((res) => res.json())
+      .then((result: AmortizacionType[]) => {
+        setAmortizaciones(result);
+      });
+  } else {
+    // Si el nombre es nulo o vacío, realizar una búsqueda genérica
+    fetch("http://localhost:3000/amortizaciones")
+      .then((res) => res.json())
+      .then((result: AmortizacionType[]) => {
+        setAmortizaciones(result);
+      });
+  }
+};
+
+
   return (
     <div className="amortizaciones-container">
       <h1>Amortizaciones</h1>
@@ -82,10 +104,20 @@ function Amortizaciones() {
         <button onClick={handleBuscarAmortizacionesByPrestamo}>Buscar</button>
       </div>
 
+      <div className="prestamo-busqueda-nombre">
+            <input
+              type="text"
+              placeholder="Buscar préstamo por nombre de cliente"
+              value={clienteNombre}
+              onChange={(e) => setClienteNombre(e.target.value)}
+            />
+            <button onClick={handleBuscarPorNombre}>Buscar por Nombre</button>
+        </div>
+
       <table className="amortizaciones-table">
         <thead>
           <tr>
-            <th scope="col">ID Préstamo</th>
+            <th scope="col">ID Del Préstamo</th>
             <th scope="col">ID Amortización</th>
             <th scope="col">NO. Pago</th>
             <th scope="col">Fecha</th>
@@ -98,7 +130,7 @@ function Amortizaciones() {
           {amortizaciones.length > 0 ? (
             amortizaciones.map((row) => (
               <tr key={row.id}>
-                <td>{row.prestamo_id}</td>
+                <td>{row?.prestamo?.id}</td>
                 <td>{row.id}</td>
                 <td>{row.quincena}</td>
                 <td>{new Date(row.fecha_pago).toLocaleDateString()}</td>

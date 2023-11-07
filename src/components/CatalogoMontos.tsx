@@ -56,6 +56,35 @@ function CatalogoMontos() {
   return (
     <div className="catalogo-montos">
       <h1>Catálogo de Montos</h1>
+
+      <div className="monto-form">
+  <div className="monto-input">
+    <label htmlFor="monto">Monto:</label>
+    <input
+      type="number"
+      id="monto"
+      placeholder="Ingrese el monto"
+      value={nuevoMonto.monto}
+      onChange={(e) => setNuevoMonto({ ...nuevoMonto, monto: +e.target.value })}
+    />
+  </div>
+  <div className="monto-input">
+    <label htmlFor="plazos">Plazos:</label>
+    <input
+      type="number"
+      id="plazos"
+      placeholder="Ingrese la cantidad de plazos"
+      value={nuevoMonto.cantidad_plazos}
+      onChange={(e) => setNuevoMonto({ ...nuevoMonto, cantidad_plazos: +e.target.value })}
+    />
+  </div>
+  <button onClick={handleAgregarMonto}>Agregar Catálogo</button>
+</div>
+
+
+    
+
+      
       <ul>
         {montos.map((monto) => (
           <li key={monto.id} className="monto-item">
@@ -69,21 +98,7 @@ function CatalogoMontos() {
           </li>
         ))}
       </ul>
-      <div className="monto-form">
-        <input
-          type="number"
-          placeholder="Monto"
-          value={nuevoMonto.monto}
-          onChange={(e) => setNuevoMonto({ ...nuevoMonto, monto: +e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Cantidad de Plazos"
-          value={nuevoMonto.cantidad_plazos}
-          onChange={(e) => setNuevoMonto({ ...nuevoMonto, cantidad_plazos: +e.target.value })}
-        />
-        <button onClick={handleAgregarMonto}>Agregar Catálogo</button>
-      </div>
+     
       <h2>Consultar Monto por ID</h2>
       <div className="consulta-monto">
         <input

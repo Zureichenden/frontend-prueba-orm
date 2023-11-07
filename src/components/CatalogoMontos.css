@@ -32,12 +32,38 @@
     margin-right: 5px;
   }
   
-  /* Estilos para el formulario de agregar montos */
   .monto-form {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
+  
+  .monto-inputs {
+    display: flex;
+    gap: 10px; /* Espacio entre los campos de entrada */
+  }
+  
+  .monto-form input {
+    width: 80px; /* Ancho de los campos de entrada */
+  }
+  
+  /* Estilo para el botón */
+  .monto-form button {
+    margin-top: 10px; /* Espacio entre los campos de entrada y el botón */
+  }
+
+  .monto-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .monto-input label {
+    margin-right: 10px; /* Ajusta el valor para controlar la cantidad de espacio entre la etiqueta y el input */
+  }
+  
+  
+  
   
   input {
     margin: 5px 0;

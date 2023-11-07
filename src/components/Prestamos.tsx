@@ -258,7 +258,7 @@ function Prestamos() {
                 <td>{prestamo.fecha_inicio}</td>
                 <td>{prestamo.interes}%</td>
                 <td>
-                  <button onClick={() => handleConsultarPrestamo(prestamo.id)}>Consultar</button>
+                    {/* <button onClick={() => handleConsultarPrestamo(prestamo.id)}>Consultar</button> */}
                   <button onClick={() => handleBuscarAmortizacionesByPrestamo(prestamo.id)}>Ver Amortización</button>
 
                 </td>
