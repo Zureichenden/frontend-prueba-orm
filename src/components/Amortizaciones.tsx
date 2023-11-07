@@ -1,58 +1,121 @@
 import React, { useState, useEffect } from 'react';
+import './Amortizacion.css'; // Importa un archivo CSS para los estilos
 
 interface ClienteType {
   id: number;
   nombre: string;
 }
 
+interface MontoType {
+  id: number;
+  monto: number;
+  cantidad_plazos: number;
+}
+
+interface PrestamoType {
+  id: number;
+  cliente: ClienteType;
+  monto: MontoType;
+  fecha_inicio: string;
+  interes: number;
+}
+
+// Define el tipo de datos para amortizaciones
+interface AmortizacionType {
+  id: number;
+  prestamo_id: number;
+  quincena: number;
+  fecha_pago: string;
+  monto_pago: number;
+  interes_pago: number;
+  abono: number;
+  capital_pendiente: number;
+}
+
 function Amortizaciones() {
-  const [clientes, setClientes] = useState<ClienteType[]>([]);
-  const [nuevoCliente, setNuevoCliente] = useState({ nombre: '' });
+  const [amortizaciones, setAmortizaciones] = useState<AmortizacionType[]>([]);
+  const [prestamoId, setPrestamoId] = useState<number | null>(null);
+  const [prestamos, setPrestamos] = useState<PrestamoType[]>([]);
+
+ 
 
   useEffect(() => {
-    // Realiza una solicitud para obtener la lista de clientes
-    fetch("http://localhost:3000/clientes")
+    // Realiza una solicitud para obtener los datos de amortizaciones
+    fetch("http://localhost:3000/amortizaciones")
       .then((res) => res.json())
-      .then((result: ClienteType[]) => {
-        setClientes(result);
+      .then((result: AmortizacionType[]) => {
+        setAmortizaciones(result);
       });
   }, []);
 
-  const handleAgregarCliente = () => {
-    // Realiza una solicitud para agregar un nuevo cliente
-    fetch("http://localhost:3000/clientes", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(nuevoCliente),
-    })
-    .then((res) => res.json())
-    .then((cliente: ClienteType) => {
-      // Actualiza la lista de clientes con el nuevo cliente
-      setClientes([...clientes, cliente]);
-      // Limpia el formulario
-      setNuevoCliente({ nombre: '' });
-    });
+  const handleConsultarAmortizacionesByPrestamo = (prestamoId: number) => {
+    fetch(`http://localhost:3000/amortizaciones/prestamo/${prestamoId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { prestamo, amortizaciones } = data;
+  
+        const cliente = prestamo.cliente;
+        const monto = prestamo.monto;
+  
+        alert(`Cliente: ${cliente.nombre}, Monto: $${monto.monto}, Fecha de Inicio: ${prestamo.fecha_inicio}, Interés: ${prestamo.interes}%`);
+      });
+  };
+  
+
+  const handleBuscarAmortizacionesByPrestamo = () => {
+    if (prestamoId) {
+      handleConsultarAmortizacionesByPrestamo(prestamoId);
+    }
   };
 
   return (
-    <div>
+    <div className="amortizaciones-container">
       <h1>Amortizaciones</h1>
-      <ul>
-        {clientes.map((cliente) => (
-          <li key={cliente.id}>{cliente.nombre}</li>
-        ))}
-      </ul>
-      <div>
+
+      <div className="prestamo-busqueda">
         <input
-          type="text"
-          placeholder="Nombre del cliente"
-          value={nuevoCliente.nombre}
-          onChange={(e) => setNuevoCliente({ nombre: e.target.value })}
+          type="number"
+          placeholder="Buscar préstamo por ID"
+          value={prestamoId || ''}
+          onChange={(e) => setPrestamoId(+e.target.value)}
         />
-        <button onClick={handleAgregarCliente}>Agregar Cliente</button>
+        <button onClick={handleBuscarAmortizacionesByPrestamo}>Buscar</button>
       </div>
+
+      <table className="amortizaciones-table">
+        <thead>
+          <tr>
+            <th scope="col">ID Préstamo</th>
+            <th scope="col">ID Amortización</th>
+            <th scope="col">NO. Pago</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Préstamo</th>
+            <th scope="col">Interés</th>
+            <th scope="col">Abono</th>
+          </tr>
+        </thead>  
+        <tbody>
+          {amortizaciones.length > 0 ? (
+            amortizaciones.map((row) => (
+              <tr key={row.id}>
+                <td>{row.prestamo_id}</td>
+                <td>{row.id}</td>
+                <td>{row.quincena}</td>
+                <td>{new Date(row.fecha_pago).toLocaleDateString()}</td>
+                <td>${typeof row.monto_pago === 'number' ? row.monto_pago.toFixed(2) : row.monto_pago}</td>
+                <td>${typeof row.interes_pago === 'number' ? row.interes_pago.toFixed(2) : row.interes_pago}</td>
+                <td>${typeof row.abono === 'number' ? row.abono.toFixed(2) : row.abono}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td className="text-center">
+                No hay registros de amortizaciones disponibles.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 }

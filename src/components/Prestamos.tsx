@@ -20,6 +20,17 @@ interface PrestamoType {
   interes: number;
 }
 
+interface AmortizacionType {
+  id: number;
+  prestamo_id: number;
+  quincena: number;
+  fecha_pago: string;
+  monto_pago: number;
+  interes_pago: number;
+  abono: number;
+  capital_pendiente: number;
+}
+
 function Prestamos() {
   const [prestamos, setPrestamos] = useState<PrestamoType[]>([]);
   const [nuevoPrestamo, setNuevoPrestamo] = useState({
@@ -89,6 +100,36 @@ function Prestamos() {
     }
   };
 
+  
+  const handleConsultarAmortizacionesByPrestamo = (prestamoId: number) => {
+    fetch(`http://localhost:3000/amortizaciones/prestamo/${prestamoId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { prestamo, amortizaciones } = data;
+  
+        const cliente = prestamo.cliente;
+        const monto = prestamo.monto;
+        const fechaInicio = prestamo.fecha_inicio;
+        const interes = prestamo.interes;
+  
+        const amortizacionesInfo = amortizaciones.map((amortizacion: AmortizacionType) => {
+          return `Quincena: ${amortizacion.quincena}, Fecha de Pago: ${amortizacion.fecha_pago}, Monto de Pago: $${amortizacion.monto_pago}, Interés: $${amortizacion.interes_pago}, Abono: $${amortizacion.abono}, Capital Pendiente: $${amortizacion.capital_pendiente}`;
+        });
+  
+        const message = `Cliente: ${cliente.nombre}, Monto: $${monto.monto}, Fecha de Inicio: ${fechaInicio}, Interés: ${interes}%\n\nAmortizaciones:\n${amortizacionesInfo.join('\n')}`;
+  
+        alert(message);
+      });
+  };
+  
+  
+
+  const handleBuscarAmortizacionesByPrestamo = (prestamoId: number) => {
+    if (prestamoId) {
+      handleConsultarAmortizacionesByPrestamo(prestamoId);
+    }
+  };
+
   return (
     <div className="container">
       <h1>Préstamos</h1>
@@ -122,6 +163,8 @@ function Prestamos() {
               <td>{prestamo.interes}%</td>
               <td>
                 <button onClick={() => handleConsultarPrestamo(prestamo.id)}>Consultar</button>
+                <button onClick={() => handleBuscarAmortizacionesByPrestamo(prestamo.id)}>Ver Amortización</button>
+
               </td>
             </tr>
           ))}
